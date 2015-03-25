@@ -2,6 +2,7 @@ var gulp = require('gulp');
 
 var gls = require('gulp-live-server');
 var runSequence = require('run-sequence');
+var sourcemaps = require('gulp-sourcemaps');
 var traceur = require('gulp-traceur');
 
 var sources = {
@@ -30,7 +31,11 @@ gulp.task('watch', function () {
 });
 
 gulp.task('traceur', function () {
-  gulp.src(sources.js).pipe(traceur()).pipe(gulp.dest(dests.js));
+  gulp.src(sources.js)
+    .pipe(sourcemaps.init())
+    .pipe(traceur())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(dests.js));
 });
 
 gulp.task('build', ['copy', 'traceur']);
