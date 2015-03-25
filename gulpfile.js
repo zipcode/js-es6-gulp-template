@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 
+var concat = require('gulp-concat');
 var gls = require('gulp-live-server');
 var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
@@ -16,10 +17,10 @@ var dests = {
 };
 
 gulp.task('webserver', function() {
-    var server = gls.static('dist');
-    server.start();
-    //live reload changed resource(s)
-    gulp.watch(['dist/**/*.css', 'dist/**/*.html', 'dist/**/*.js'], server.notify);
+  var server = gls.static(['dist', 'refs']);
+  server.start();
+  //live reload changed resource(s)
+  gulp.watch(['dist/**/*.css', 'dist/**/*.html', 'dist/**/*.js'], server.notify);
 });
 
 gulp.task('copy', function () {
@@ -27,7 +28,7 @@ gulp.task('copy', function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch(sources.html, ['build']);
+  gulp.watch([sources.html, sources.js], ['build']);
 });
 
 gulp.task('traceur', function () {
@@ -39,4 +40,4 @@ gulp.task('traceur', function () {
 });
 
 gulp.task('build', ['copy', 'traceur']);
-gulp.task('serve', ['webserver', 'watch']);
+gulp.task('serve', runSequence('build', ['webserver', 'watch']));
