@@ -1,14 +1,19 @@
 {
   "name": "ferry",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "A cute ferry tracker",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "@zip",
   "license": "ISC",
   "devDependencies": {
+    "connect-livereload": "^0.5.3",
+    "gulp": "^3.8.11",
+    "gulp-live-server": "0.0.7",
+    "gulp-traceur": "^0.17.0",
+    "run-sequence": "^1.0.2",
     "traceur": "0.0.87"
   }
 }
