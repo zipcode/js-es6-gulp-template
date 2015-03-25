@@ -29,5 +29,9 @@ gulp.task('watch', function () {
   gulp.watch(sources.html, ['build']);
 });
 
-gulp.task('build', ['copy']);
+gulp.task('traceur', function () {
+  gulp.src(sources.js).pipe(traceur()).pipe(gulp.dest(dests.js));
+});
+
+gulp.task('build', ['copy', 'traceur']);
 gulp.task('serve', ['webserver', 'watch']);
