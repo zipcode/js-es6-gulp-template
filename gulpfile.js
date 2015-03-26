@@ -9,11 +9,13 @@ var traceur = require('gulp-traceur');
 var sources = {
   html: ['src/*.html'],
   js: ['src/js/*.js'],
+  css: ['src/stylesheets/*.css'],
 };
 
 var dests = {
   html: 'dist/',
   js: 'dist/js',
+  style: 'dist/stylesheets',
 };
 
 gulp.task('webserver', function() {
@@ -24,7 +26,8 @@ gulp.task('webserver', function() {
 });
 
 gulp.task('copy', function () {
-  gulp.src(sources.html).pipe(gulp.dest(dests.html))
+  gulp.src(sources.html).pipe(gulp.dest(dests.html));
+  gulp.src(sources.css).pipe(gulp.dest(dests.style));
 });
 
 gulp.task('watch', function () {
@@ -40,4 +43,6 @@ gulp.task('traceur', function () {
 });
 
 gulp.task('build', ['copy', 'traceur']);
-gulp.task('serve', runSequence('build', ['webserver', 'watch']));
+gulp.task('serve', function () {
+  runSequence('build', ['webserver', 'watch'])
+});
