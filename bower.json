@@ -1,10 +1,10 @@
 {
-  "name": "ferry",
+  "name": "template",
   "version": "0.0.1",
   "authors": [
     "@zip <->"
   ],
-  "description": "Ferry",
+  "description": "template",
   "main": "main.js",
   "moduleType": [
     "es6"
